@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tercera Preentrega - Diaz Matias</title>
+</head>
+
+<body>
+
+    <!-- NavBar -->
+<header>
+    <nav class="navbar navbar-expand-lg header-fondo">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <div class="navbar-titulo">Commerce CoderJs</div>
+      </a>
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end p-2">
+                  <li class="nav-item">0
+                    <a class="nav-link navbar-menu boton-seccion" aria-current="page" href="index.html" id="inicio">Inicio</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle navbar-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                    <ul class="dropdown-menu desplegable-fondo">
+                      <li><button class="dropdown-item boton-seccion" id="celulares">Celulares</button></li>
+                      <li><button class="dropdown-item boton-seccion" id="auriculares">Auriculares</button></li>
+                      <li><button class="dropdown-item boton-seccion" id="monitores">Monitores</button></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <form class="d-flex buscador" role="search">
+                        <input class="form-control me-2 inputSearch" id="inputSearch" type="search" placeholder="Buscar..." aria-label="Search">
+                        <button class="btn boton-buscar" type="submit">Buscar</button>
+                      </form>
+                  </li>
+              </div>
+            </div>
+          </nav>
+</header>
+
+    <!-- Cards -->
+<main>
+    <div class="container-titulo">
+        <h1 class="titulo-seccion">Catálogo de Productos</h1>
+    </div>
+
+    <div class="container-productos" id="container-productos">
+        <!--Productos traidos de Js-->
+    </div>
+    <hr>
+
+
+    <!-- Carrito -->
+
+    <div class="container container-carrito">
+        <h2>Tu Carrito</h2>
+        <div class="containerEstadoCarrito"></div>
+        <em class="estadoCarrito">Su carrito esta vacio...</em>
+        <div class="container-productos-carrito">
+            <!--Aca se insertan los productos-->
+        </div>
+        <div class="acciones-carrito">
+        <!--Esto debe ir desde el Js, no me lo lee-->
+        <button type="button" class="boton-vaciar-carrito" id="btnComprar">testComp</button>
+        <button type="button" class="boton-vaciar-carrito" id="btnVaciarCarrito">testVaciar</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Form -->
+
+    <form class="container" id="container-form"><!--
+        <h3>Formulario de Contacto</h3>
+        <label>Nombre y Apellido</label>
+        <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre y Apellido">
+        <label>Correo Electrónico</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
+        <div class="container-formulario">
+
+            <button type="submit" class="btn btn-secondary">Comprar y Enviar Información</button>
+        </div>-->
+    </form>
+</main>
+
+<footer>
+        <hr>
+        <div class="contenedor-footer">
+            <div class="box-footer">
+                <p>Carpi, escucha mis plegarias...</p>
+            </div>
+            <div>
+                <p>Copyright 2023 ©</p>
+            </div>
+
+        </footer>
+
+
+    <script src="./app.js"></script>
+    <!-- SCRIPT PARA NAVBAR -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
