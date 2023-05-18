@@ -212,12 +212,12 @@ function desplegarFormCompra(){
     formCompra.innerHTML=`
     <h3>Formulario de Contacto</h3>
     <label>Nombre y Apellido</label>
-    <input type="text" class="form-control" id="inputName" placeholder="Ingrese su Nombre y Apellido">
+    <input type="text" class="form-control" id="inputName" placeholder="Ingrese su nombre y apellido">
     <label>Correo Electrónico</label>
     <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
     <div class="container-formulario">
 
-        <button type="submit" class="btn btn-secondary">Comprar y Enviar Información</button>
+        <button type="submit" class="btn btn-secondary">Finalizar compra</button>
     </div>`
     mostrarCarrito();
     containerForm.append(formCompra);
@@ -245,3 +245,15 @@ montoTotal = productosCarrito.reduce((acumulado, producto)=>{
     return acumulado + producto.precio*producto.cantidad
 },0);
 }
+
+const formulario = document.querySelector("#container-form");
+formulario.addEventListener("submit", enviarFormulario);
+
+function enviarFormulario(e){
+  e.preventDefault();
+  const nombre = document.querySelector("#inputName");
+  const email = document.querySelector("#inputEmail");
+  console.log(`Nombre: ${nombre.value}`);
+  console.log(`Email: ${email.value}`);
+}
+
