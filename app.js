@@ -193,12 +193,9 @@ if(productosCarrito.length > 0){
         btnVaciarCarrito.remove();
     }
 }
-/*
-montoTotal = productosCarrito.reduce((acumulado, producto)=>{
-    return acumulado + producto.precio
-},0);*/
 
 function desplegarFormCompra(){
+    if(productosCarrito.length > 0){   
         mostrarMontoTotal(); 
         let containerCarrito = document.querySelector(".container-carrito");
         let mostrarMonto = document.createElement("div");
@@ -224,6 +221,7 @@ function desplegarFormCompra(){
     btnComprar.remove();
     btnVaciarCarrito.remove();
     tituloSeccion.innerText =`Finaliza tu compra`
+}
 }
 
 function crearBotonesAccionCarrito() {
