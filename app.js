@@ -82,6 +82,7 @@ const productosArray = [
 ]
 
 let productosCarrito = []
+let montoTotal = ""
 
 const containerProductos = document.querySelector("#container-productos");
 const botonesSecciones = document.querySelectorAll(".boton-seccion")
@@ -166,8 +167,10 @@ function agregarCarrito(e){
 const containerProductosCarrito = document.querySelector(".container-productos-carrito");
 const accionesCarrito = document.querySelector(".acciones-carrito");
 const containerEstadoCarrito = document.querySelector(".containerEstadoCarrito");
-const estadoCarrito = document.querySelector(".estadoCarrito")
+const estadoCarrito = document.querySelector(".estadoCarrito");
+const containerForm = document.querySelector ("#container-form");
 
+crearBotonesAccionCarrito();
 function mostrarCarrito(){
     containerProductosCarrito.innerHTML="";
 if(productosCarrito.length > 0){    
@@ -176,33 +179,34 @@ if(productosCarrito.length > 0){
         listadoProductos.classList.add("productos-carrito")
         listadoProductos.innerHTML=`
         <div><h3 class="titulo-producto">${producto.titulo}</h3></div>
-        <div><h4 class="precio-producto">Precio: $${producto.precio}</h4></div>
+        <div><h3 class="precio-producto">Precio: $${producto.precio}</h3></div>
         <div><button type="button" class="btn btn-outline-primary">Eliminar</button></div>
         `
-
         containerProductosCarrito.appendChild(listadoProductos);
         estadoCarrito.remove()
         })
-    } if(productosCarrito.length > 0 && productosCarrito.length <= 1){ 
-        let botonesCarrito = document.createElement("div")
-        botonesCarrito.innerHTML=`
-        <button type="button" class="boton-comprar" id="btnComprar">Comprar</button>
-        <button type="button" class="boton-vaciar-carrito" id="btnVaciarCarrito">Vaciar carrito</button>
-        `
-        accionesCarrito.appendChild(botonesCarrito)}
-        //crearBotones();
+    } else {
+        estadoCarrito.innerHTML=`
+        <em class="estadoCarrito">Su carrito esta vacio...</em>`
+        containerEstadoCarrito.appendChild(estadoCarrito);
+        btnComprar.remove();
+        btnVaciarCarrito.remove();
     }
-mostrarCarrito();
+}
+/*
+montoTotal = productosCarrito.reduce((acumulado, producto)=>{
+    return acumulado + producto.precio
+},0);*/
 
-
-const containerForm = document.querySelector ("#container-form");
-const btnComprar = document.querySelector("#btnComprar");
-const btnVaciarCarrito = document.querySelector("#btnVaciarCarrito");
-
-btnComprar.addEventListener("click", () => desplegarFormCompra());
-btnVaciarCarrito.addEventListener("click", () => vaciarCarrito());
 function desplegarFormCompra(){
-    if(productosCarrito.length > 0){
+        mostrarMontoTotal(); 
+        let containerCarrito = document.querySelector(".container-carrito");
+        let mostrarMonto = document.createElement("div");
+        mostrarMonto.classList.add("productos-carrito");
+        mostrarMonto.innerHTML=`
+        <h4 class="titulo-producto">Total: $${montoTotal}</h4></div>`
+        containerCarrito.appendChild(mostrarMonto);
+
     let formCompra = document.createElement("div")
     formCompra.innerHTML=`
     <h3>Formulario de Contacto</h3>
@@ -214,26 +218,28 @@ function desplegarFormCompra(){
 
         <button type="submit" class="btn btn-secondary">Comprar y Enviar Información</button>
     </div>`
+    mostrarCarrito();
     containerForm.append(formCompra);
     containerProductos.remove();
     btnComprar.remove();
     btnVaciarCarrito.remove();
     tituloSeccion.innerText =`Finaliza tu compra`
-    }
 }
 
-desplegarFormCompra();
-
-function vaciarCarrito(productosCarrito){
-    listadoProductos.innerHTML=``
-    containerProductosCarrito.appendChild(listadoProductos);
-    productosCarrito = []
+function crearBotonesAccionCarrito() {
+const btnComprar = document.querySelector("#btnComprar");
+const btnVaciarCarrito = document.querySelector("#btnVaciarCarrito");
+btnComprar.addEventListener("click", () => desplegarFormCompra());
+btnVaciarCarrito.addEventListener("click", () => vaciarCarrito());
 }
 
+function vaciarCarrito(){
+    productosCarrito = [];
+    mostrarCarrito();
+}
 
-function crearBotones() {
-   const btnComprar = document.querySelector("#btnComprar");
-   const btnVaciarCarrito = document.querySelector("#btnVaciarCarrito");
-    btnComprar.addEventListener("click", () => desplegarFormCompra());
-    btnVaciarCarrito.addEventListener("click", () => vaciarCarrito());
+function mostrarMontoTotal(){
+montoTotal = productosCarrito.reduce((acumulado, producto)=>{
+    return acumulado + producto.precio
+},0);
 }
