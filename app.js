@@ -82,13 +82,13 @@ const productosArray = [
 ]
 
 let productosCarrito = []
+productosCarrito = JSON.parse(localStorage.getItem("productos-carrito")) || [];
 let montoTotal = ""
 
 const containerProductos = document.querySelector("#container-productos");
 const botonesSecciones = document.querySelectorAll(".boton-seccion")
 const tituloSeccion = document.querySelector(".titulo-seccion")
 let botonesAgregar = document.querySelectorAll(".boton-agregar")
-let cantidad
 
 function filtrarProductos(productosArray){
     const inputSearch = document.querySelector(".inputSearch");
@@ -171,7 +171,7 @@ const accionesCarrito = document.querySelector(".acciones-carrito");
 const containerEstadoCarrito = document.querySelector(".containerEstadoCarrito");
 const estadoCarrito = document.querySelector(".estadoCarrito");
 const containerForm = document.querySelector ("#container-form");
-
+mostrarCarrito();
 crearBotonesAccionCarrito();
 function mostrarCarrito(){
     containerProductosCarrito.innerHTML="";
@@ -186,15 +186,15 @@ if(productosCarrito.length > 0){
         `
         containerProductosCarrito.appendChild(listadoProductos);
         estadoCarrito.remove()
-        btnComprar.classList.add("boton-comprar");
-        btnVaciarCarrito.classList.add("boton-vaciar-carrito");
+        btnComprar.classList.replace("boton-deshabilitado","boton-comprar");
+        btnVaciarCarrito.classList.add("boton-deshabilitado","boton-vaciar-carrito");
         })
     } else {
         estadoCarrito.innerHTML=`
         <em class="estadoCarrito">Su carrito esta vacio...</em>`
         containerEstadoCarrito.appendChild(estadoCarrito);
-        btnComprar.classList.add("boton-deshabilitado");
-        btnVaciarCarrito.classList.add("boton-deshabilitado");
+        btnComprar.classList.replace("boton-comprar", "boton-deshabilitado");
+        btnVaciarCarrito.classList.replace("boton-vaciar-carrito", "boton-deshabilitado");
     }
 }
 
@@ -217,7 +217,7 @@ function desplegarFormCompra(){
     <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su E-mail">
     <div class="container-formulario">
 
-        <button type="submit" class="btn btn-secondary">Finalizar compra</button>
+        <button type="submit" class="btn btn-secondary" id="finalizar-compra">Finalizar compra</button>
     </div>`
     mostrarCarrito();
     containerForm.append(formCompra);
@@ -238,6 +238,7 @@ btnVaciarCarrito.addEventListener("click", () => vaciarCarrito());
 function vaciarCarrito(){
     productosCarrito = [];
     mostrarCarrito();
+    localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito));
 }
 
 function mostrarMontoTotal(){
@@ -246,14 +247,30 @@ montoTotal = productosCarrito.reduce((acumulado, producto)=>{
 },0);
 }
 
-const formulario = document.querySelector("#container-form");
+
+let formulario = document.querySelector("#container-form");
+let containerTitulo = document.querySelector("#container-titulo");
 formulario.addEventListener("submit", enviarFormulario);
 
+//Ignoremos un poquito esta desprolijidad de ultimo momento, entre en panico. TKM ♥
 function enviarFormulario(e){
   e.preventDefault();
-  const nombre = document.querySelector("#inputName");
-  const email = document.querySelector("#inputEmail");
-  console.log(`Nombre: ${nombre.value}`);
-  console.log(`Email: ${email.value}`);
-}
+    const nombre = document.querySelector("#inputName");
+    const email = document.querySelector("#inputEmail");
+    const finalizarCompra = document.querySelector("#finalizar-compra");
+    containerCarrito = document.querySelector(".container-carrito");
+    formulario = document.querySelector("#container-form");
+    const alertCompra = document.createElement("div");
+    alertCompra.classList.add("compra-exitosa");
+    alertCompra.innerHTML = `<em>${nombre.value} su compra fue realizada exitosamente. Se enviara la factura a ${email.value}<em>`
+    tituloSeccion.innerText = "Compra exitosa.";
+    containerTitulo.appendChild(alertCompra);
+    finalizarCompra.remove();
+    estadoCarrito.remove();
+    containerCarrito.remove();
+    containerForm.remove();
+};
+
+vaciarCarrito();
+
 
