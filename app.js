@@ -232,13 +232,7 @@ function crearBotonesAccionCarrito() {
 const btnComprar = document.querySelector("#btnComprar");
 const btnVaciarCarrito = document.querySelector("#btnVaciarCarrito");
 btnComprar.addEventListener("click", () => desplegarFormCompra());
-btnVaciarCarrito.addEventListener("click", () => vaciarCarrito());
-}
-
-function vaciarCarrito(){
-    productosCarrito = [];
-    mostrarCarrito();
-    localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito));
+btnVaciarCarrito.addEventListener("click", () => alertaVaciar());
 }
 
 function mostrarMontoTotal(){
@@ -252,7 +246,6 @@ let formulario = document.querySelector("#container-form");
 let containerTitulo = document.querySelector("#container-titulo");
 formulario.addEventListener("submit", enviarFormulario);
 
-//Ignoremos un poquito esta desprolijidad de ultimo momento, entre en panico. TKM ♥
 function enviarFormulario(e){
   e.preventDefault();
     const nombre = document.querySelector("#inputName");
@@ -271,6 +264,30 @@ function enviarFormulario(e){
     containerForm.remove();
 };
 
-vaciarCarrito();
+function alertaVaciar(){
+    if(productosCarrito.length > 0){ 
+    swal.fire({
+        title: '¡Cuidado!',
+        text: '¿Estás seguro que deseas vaciar tu carrito?',
+        icon: 'warning',
+        iconColor: "orange",
+        confirmButtonText: 'Si',
+        confirmButtonColor: `#1A8F1A`,
+        showCancelButton: "true",
+        cancelButtonText: `No`,
+        cancelButtonColor: `#d9230f`,
+      }).then((result) => {
+        if(result.isConfirmed){
+            vaciarCarrito()
+        }
+      })
+    }
+}
+
+function vaciarCarrito(){
+    productosCarrito = [];
+    mostrarCarrito();
+    localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito));
+}
 
 

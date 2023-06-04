@@ -1,0 +1,22 @@
+{
+  "name": "preentrega3-diaz",
+  "version": "1.0.0",
+  "description": "Entrega final JS-CoderHouse",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiazMD/preentrega3-DiazMatias.git"
+  },
+  "author": "Diaz Matias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiazMD/preentrega3-DiazMatias/issues"
+  },
+  "homepage": "https://github.com/DiazMD/preentrega3-DiazMatias#readme",
+  "dependencies": {
+    "sweetalert2": "^11.7.10"
+  }
+}
