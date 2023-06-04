@@ -161,6 +161,7 @@ function agregarCarrito(e){
     localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito))
  console.log(productosCarrito);
  mostrarCarrito();
+ mensajeAgregadoAlCarrito();
 }
 
 
@@ -290,4 +291,18 @@ function vaciarCarrito(){
     localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito));
 }
 
+function mensajeAgregadoAlCarrito(){
+    Toastify({
+        text: "Agregado al carrito",
+        duration: 1000, 
+        style: {
+            background: "#1AC247",
+          }
+        }).showToast();
+}
 
+fetch("./productos.json")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
