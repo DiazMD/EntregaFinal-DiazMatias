@@ -201,7 +201,6 @@ function enviarFormulario(e){
             alertCompra.classList.add("compra-fallida");
             alertCompra.innerHTML = `<em>Debe completar los campos obligatoriamente para finalizar.<em>`
         }
-        
         formulario.appendChild(alertCompra);
     }
 };
