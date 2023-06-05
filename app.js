@@ -169,9 +169,10 @@ montoTotal = productosCarrito.reduce((acumulado, producto)=>{
 },0);
 }
 
-
 let formulario = document.querySelector("#container-form");
 let containerTitulo = document.querySelector("#container-titulo");
+
+
 formulario.addEventListener("submit", enviarFormulario);
 
 function enviarFormulario(e){
@@ -182,6 +183,7 @@ function enviarFormulario(e){
     containerCarrito = document.querySelector(".container-carrito");
     formulario = document.querySelector("#container-form");
     const alertCompra = document.createElement("div");
+    if (nombre.value != "" && email.value != ""){
     alertCompra.classList.add("compra-exitosa");
     alertCompra.innerHTML = `<em>${nombre.value} su compra fue realizada exitosamente. Se enviara la factura a ${email.value}<em>`
     tituloSeccion.innerText = "Compra exitosa.";
@@ -192,8 +194,12 @@ function enviarFormulario(e){
     estadoCarrito.remove();
     containerCarrito.remove();
     containerForm.remove();
+    } else {
+        alertCompra.classList.add("compra-fallida");
+        alertCompra.innerHTML = `<em>Debe completar los campos obligatoriamente para finalizar.<em>`
+        formulario.appendChild(alertCompra);
+    }
 };
-
 
 
 function alertaVaciar(){
