@@ -186,11 +186,15 @@ function enviarFormulario(e){
     alertCompra.innerHTML = `<em>${nombre.value} su compra fue realizada exitosamente. Se enviara la factura a ${email.value}<em>`
     tituloSeccion.innerText = "Compra exitosa.";
     containerTitulo.appendChild(alertCompra);
+    productosCarrito = [];
+    localStorage.setItem("productos-carrito", JSON.stringify(productosCarrito));
     finalizarCompra.remove();
     estadoCarrito.remove();
     containerCarrito.remove();
     containerForm.remove();
 };
+
+
 
 function alertaVaciar(){
     if(productosCarrito.length > 0){ 
