@@ -2,7 +2,7 @@ let productosArray = [];
 let muestroError = false;
 async function cargarProductos() {
     try {
-        const response = await fetch('https://diazmd.github.io/preentrega3-DiazMatias/productos.json');
+        const response = await fetch('https://diazmd.github.io/EntregaFinal-DiazMatias/productos.json');
         const data = await response.json();
         productosArray = data;
         printProductos(productosArray);
