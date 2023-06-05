@@ -1,4 +1,5 @@
 let productosArray = [];
+let muestroError = false;
 async function cargarProductos() {
     try {
         const response = await fetch('https://diazmd.github.io/preentrega3-DiazMatias/productos.json');
@@ -195,8 +196,12 @@ function enviarFormulario(e){
     containerCarrito.remove();
     containerForm.remove();
     } else {
-        alertCompra.classList.add("compra-fallida");
-        alertCompra.innerHTML = `<em>Debe completar los campos obligatoriamente para finalizar.<em>`
+        if (!muestroError) {
+            muestroError = true;
+            alertCompra.classList.add("compra-fallida");
+            alertCompra.innerHTML = `<em>Debe completar los campos obligatoriamente para finalizar.<em>`
+        }
+        
         formulario.appendChild(alertCompra);
     }
 };
