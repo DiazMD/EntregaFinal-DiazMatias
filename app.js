@@ -1,86 +1,16 @@
-const productosArray = [
-    {
-        id: "celular-01",
-        titulo: "Samsung Galaxy S23 ULTRA",
-        imagen: "./img/S23-Ultra.png",
-        precio: 489000,
-        categoria: {
-            titulo: "Celulares",
-            id: "celulares"
-        }
-    },
-    {
-        id: "celular-02",
-        titulo: "Samsung Galaxy A54",
-        imagen: "./img/A54.png",
-        precio: 184500,
-        categoria: {
-            titulo: "Celulares",
-            id: "celulares"
-        }
-    },
-    {
-        id: "monitor-01",
-        titulo: "Monitor Samsung 27''",
-        imagen: "./img/MonitorSamsung27.png",
-        precio: 78999,
-        categoria: {
-            titulo: "Monitores",
-            id: "monitores"
-        }
-    },
-    {
-        id: "monitor-02",
-        titulo: "Monitor Samsung 24''",
-        imagen: "./img/MonitorSamsung24.png",
-        precio: 61000,
-        categoria: {
-            titulo: "Monitores",
-            id: "monitores"
-        }
-    },
-    {
-        id: "celular-03",
-        titulo: "Motorola Edge 30 Neo",
-        imagen: "./img/Motorola30Edgeneo.png",
-        precio: 149999,
-        categoria: {
-            titulo: "Celulares",
-            id: "celulares"
-        }
-    },
-    {
-        id: "auricular-01",
-        titulo: "Auriculares Galaxy Buds 2",
-        imagen: "./img/GalaxyBuds2.png",
-        precio: 36999,
-        categoria: {
-            titulo: "Auriculares",
-            id: "auriculares"
-        } 
-    },
-    {
-        id: "auricular-02",
-        titulo: "Xiaomi Redmi Buds 3",
-        imagen: "./img/XiaomiRedmiBuds3.png",
-        precio: 13999,
-        categoria: {
-            titulo: "Auriculares",
-            id: "auriculares"
-        } 
-    },
-    {
-        id: "celular-04",
-        titulo: "Moto G72",
-        imagen: "./img/MotoG72.png",
-        precio: 119999,
-        categoria: {
-            titulo: "Celulares",
-            id: "celulares"
-        } 
+let productosArray = [];
+async function cargarProductos() {
+    try {
+        const response = await fetch('https://diazmd.github.io/preentrega3-DiazMatias/productos.json');
+        const data = await response.json();
+        productosArray = data;
+        printProductos(productosArray);
+    } catch (error) {
+       console.error(error);
+        alert('Ha ocurrido un error!');
     }
-]
-
+  }
+ 
 let productosCarrito = []
 productosCarrito = JSON.parse(localStorage.getItem("productos-carrito")) || [];
 let montoTotal = ""
@@ -117,10 +47,7 @@ const productosFiltrados = filtrarProductos(productosArray);
     });
 
     actualizarBotonesAgregar();
-    console.log(botonesAgregar)
 }
-
-printProductos(productosArray);
 
 // Filtrado por busqueda
 
@@ -301,8 +228,4 @@ function mensajeAgregadoAlCarrito(){
         }).showToast();
 }
 
-fetch("./productos.json")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
+cargarProductos();
